@@ -26,9 +26,11 @@ import com.example.apprickymorty.viewModel.ListPersonajeViewModel
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import com.example.apprickymorty.R
 import com.example.apprickymorty.ui.theme.Purple40
 
 @Composable
@@ -48,6 +50,11 @@ fun PersonajeDetailScreen(personajeId: String,
         IconButton(onClick = onBackClick) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
         }
+        Text(
+            text = stringResource(id = R.string.Character_details),
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(16.dp)
+        )
         personajeDetail?.let { personaje ->
             // Imagen del personaje en un tamaño más grande
             Box(
