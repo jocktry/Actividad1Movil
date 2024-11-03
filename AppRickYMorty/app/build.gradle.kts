@@ -74,7 +74,7 @@ dependencies {
     implementation(libs.google.gson) // Gson library
     implementation(libs.squareup.okhttp3)
     //implementation(libs.androidx.navigation.compose)
-
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     //viewModel utilities for Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")

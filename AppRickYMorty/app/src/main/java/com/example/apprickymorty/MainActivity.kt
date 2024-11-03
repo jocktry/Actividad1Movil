@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,7 +24,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppRickYMortyTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(/*
+                    topBar = {
+                        TopAppBar(title = { Text("Personajes de Rick y Morty") })
+                    },*/modifier = Modifier.fillMaxSize()) { innerPadding ->
                  //Creación View Model
                     val personajesVM = viewModel<ListPersonajeViewModel>()
                     //Lista de Personajes
