@@ -3,4 +3,5 @@
     <string name="list_screen_title">Listado de Personajes</string>
     <string name="Character_details">Detalles del Personaje</string>
     <string name="Location_details">Detalles de la Ubicación</string>
+    <string name="search_hint">Buscar personaje...</string>
 </resources>

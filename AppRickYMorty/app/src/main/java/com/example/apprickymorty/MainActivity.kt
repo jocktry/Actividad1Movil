@@ -7,24 +7,23 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.apprickymorty.repository.PersonajeRepository
 import com.example.apprickymorty.screens.ListPersonaje
 import com.example.apprickymorty.screens.PersonajeDetailScreen
 import com.example.apprickymorty.screens.UbicacionScreen
 import com.example.apprickymorty.ui.theme.AppRickYMortyTheme
 import com.example.apprickymorty.viewModel.ListPersonajeViewModel
+import com.example.apprickymorty.viewModel.ListPersonajeViewModelFactory
 
+//Clase Main
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,24 +31,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppRickYMortyTheme {
                 val navController = rememberNavController() // Controlador de navegación
-                Scaffold(/*
-                    topBar = {
-                        TopAppBar(title = { Text("Personajes de Rick y Morty") })
-                    },*/modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AppNavigation(navController, innerPadding)
+                val personajeRepository = PersonajeRepository()
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    AppNavigation(navController, innerPadding, personajeRepository)
 
-                //Creación View Model
-                 //   val personajesVM = viewModel<ListPersonajeViewModel>()
-                    //Lista de Personajes
-                 //   ListPersonaje(personajesVM, innerPadding);
                 }
             }
         }
     }
 }@Composable
-fun AppNavigation(navController: NavHostController, innerPadding: PaddingValues) {
+fun AppNavigation(navController: NavHostController, innerPadding: PaddingValues,
+                  personajeRepository: PersonajeRepository) {
+
     // Crea el ViewModel
-    val personajesVM: ListPersonajeViewModel = viewModel()
+    val viewModelFactory = ListPersonajeViewModelFactory(personajeRepository)
+    val personajesVM: ListPersonajeViewModel = viewModel(factory = viewModelFactory)
 
     // Define el NavHost con los destinos de navegación
     NavHost(

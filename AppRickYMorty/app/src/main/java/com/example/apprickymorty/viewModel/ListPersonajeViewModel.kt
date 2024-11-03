@@ -7,16 +7,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apprickymorty.data.Personaje
 import com.example.apprickymorty.data.Ubicacion
-import com.example.apprickymorty.repository.PersonajeRepository
+import com.example.apprickymorty.repository.PersonajeRepositoryI
 import kotlinx.coroutines.launch
 
-class ListPersonajeViewModel: ViewModel() {
-    private val repository = PersonajeRepository()
-
+class ListPersonajeViewModel(private val repository: PersonajeRepositoryI): ViewModel() {
     //Variable en memoria que almacena la lista de personajes
     private val _personajes:MutableState<List<Personaje>> = mutableStateOf(emptyList())
     //Variable publica observable
-    var personajesVM: State<List<Personaje>> = _personajes
+    val personajesVM: State<List<Personaje>> = _personajes
+    //Lista de personajes filtrados, para el elemento outlinedtext
+    val personajesFiltered = mutableStateOf<List<Personaje>>(emptyList())
 
     //Variable para el detalle de un personaje
     private val _personajeDetail: MutableState<Personaje?> = mutableStateOf(null)
@@ -29,14 +29,19 @@ class ListPersonajeViewModel: ViewModel() {
     init{
         //cargar los datos
         fetchPersonajes()
+        personajesFiltered.value = personajesVM.value
     }
 
     private fun fetchPersonajes() {
         viewModelScope.launch {
-            _personajes.value = repository.getPersonajes().results
+            try {
+                _personajes.value = repository.getPersonajes().results
+                println("Personajes cargados: ${_personajes.value}")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
-
     fun fetchPersonajeDetail(personajeId: String) {
         viewModelScope.launch {
             _personajeDetail.value = repository.getPersonajeDetail(personajeId)
@@ -48,5 +53,4 @@ class ListPersonajeViewModel: ViewModel() {
             _ubicacionDetail.value = repository.getUbicacion(ubicacionId)
         }
     }
-
 }

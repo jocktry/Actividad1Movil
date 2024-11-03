@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.apprickymorty.R
-import com.example.apprickymorty.ui.theme.Purple40
 
 @Composable
 fun PersonajeDetailScreen(personajeId: String,

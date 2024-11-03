@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    testImplementation(libs.junit.junit)
     val lifecycle_version = "2.8.5"
 
     implementation(libs.androidx.core.ktx)
@@ -67,17 +68,16 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    //implementation(libs.kotlinx.serialization.json)
     implementation(libs.squareup.kotlinx.serialization)
     implementation(libs.squareup.retrofit)
     implementation(libs.retrofit.gson.converter) // GsonConverterFactory
     implementation(libs.google.gson) // Gson library
     implementation(libs.squareup.okhttp3)
-    //implementation(libs.androidx.navigation.compose)
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("androidx.navigation:navigation-compose:2.7.1")
-
-
     //viewModel utilities for Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+    // Otras dependencias
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+
 }

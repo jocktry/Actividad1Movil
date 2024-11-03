@@ -6,20 +6,20 @@ import com.example.apprickymorty.data.Ubicacion
 import com.example.apprickymorty.interfaces.RetrofitInstance
 
 //Clase Repositorio
-class PersonajeRepository {
+class PersonajeRepository: PersonajeRepositoryI {
 
     // Obtener todos los personajes
-    suspend fun getPersonajes(): PersonajeResponse {
+     override suspend fun getPersonajes(): PersonajeResponse {
         return RetrofitInstance.api.getPersonajes()
     }
 
     // Obtener detalles de un personaje por su ID
-    suspend fun getPersonajeDetail(personajeId: String): Personaje {
+    override suspend fun getPersonajeDetail(personajeId: String): Personaje {
         return RetrofitInstance.api.getPersonajeDetail(personajeId)
     }
 
     //Obtener detalle de la ubicacion
-    suspend fun getUbicacion(ubicacionId: String): Ubicacion {
+   override suspend fun getUbicacion(ubicacionId: String): Ubicacion {
         return RetrofitInstance.api.getUbicacion(ubicacionId)
     }
 }
