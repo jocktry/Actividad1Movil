@@ -11,10 +11,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.apprickymorty.data.Personaje
 import com.example.apprickymorty.viewModel.ListPersonajeViewModel
 
 @Composable
-fun ListPersonaje(personajesVM: ListPersonajeViewModel, innerPadding:PaddingValues){
+fun ListPersonaje(
+    personajesVM: ListPersonajeViewModel,
+    innerPadding:PaddingValues,
+    onPersonajeClick: (Personaje) -> Unit // Callback de navegación
+     ){
     //Layout Columna
     //Column(modifier = Modifier.padding(innerPadding)){
       LazyColumn (modifier = Modifier
@@ -23,7 +28,7 @@ fun ListPersonaje(personajesVM: ListPersonajeViewModel, innerPadding:PaddingValu
       ){
           personajesVM.personajesVM.value.forEach{personaje ->
             item {
-                PersonajeCard(personaje)
+                PersonajeCard(personaje=personaje, onClick = { onPersonajeClick(personaje) })
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }

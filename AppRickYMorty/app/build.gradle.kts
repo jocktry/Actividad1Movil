@@ -75,6 +75,8 @@ dependencies {
     implementation(libs.squareup.okhttp3)
     //implementation(libs.androidx.navigation.compose)
     implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("androidx.navigation:navigation-compose:2.7.1")
+
 
     //viewModel utilities for Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")

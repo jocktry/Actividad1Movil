@@ -1,6 +1,7 @@
 package com.example.apprickymorty.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -16,8 +17,11 @@ import coil.compose.rememberImagePainter
 import com.example.apprickymorty.data.Personaje
 
 @Composable
-fun PersonajeCard(personaje: Personaje){
-    Row(modifier = Modifier.padding(8.dp)) {
+fun PersonajeCard(personaje: Personaje, onClick: () -> Unit){
+    Row(modifier = Modifier
+        .padding(8.dp)
+        .clickable { onClick() } // Navegar cuando se selecciona el personaje
+    ) {
         Image(
             painter = rememberImagePainter(personaje.image),
             contentDescription = null,
@@ -25,8 +29,8 @@ fun PersonajeCard(personaje: Personaje){
         )
         Column(modifier = Modifier.padding(start = 8.dp)) {
             Text(personaje.name, style = MaterialTheme.typography.headlineSmall)
-            Text("Status: ${personaje.status}", style = MaterialTheme.typography.bodyMedium)
-            Text("Species: ${personaje.species}", style = MaterialTheme.typography.bodyMedium)
+            Text("Estado: ${personaje.status}", style = MaterialTheme.typography.bodyMedium)
+            Text("Especie: ${personaje.species}", style = MaterialTheme.typography.bodyMedium)
         }
     }
 }
